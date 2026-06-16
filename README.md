@@ -9,15 +9,8 @@
 > Agente inteligente de análise documental com separação estrita de pipelines de **Compliance/LGPD** e **Antifraude**, trilha de auditoria imutável, token JWT em todas as telas e score de risco 0–100.
 
 ---
-
-## 📌 Visão geral
-
-O AIAD automatiza a triagem documental para times de **Jurídico, Compliance e Segurança**, eliminando gargalos manuais e mitigando riscos de fraude em contratos, documentos KYC e assinaturas digitais.
-
-### Diferenciais em relação ao CONFER e BRFLOW
-
-| Funcionalidade | **AIAD** |
-|---|---|---|---|
+| Funcionalidade | Soluções Tradicionais | Concorrentes | **AIAD** |
+| --- | --- | --- | --- |
 | Separação compliance × fraude | ❌ | Parcial | ✅ Pipelines independentes |
 | Detecção de autofraude | ❌ | ❌ | ✅ Módulo dedicado |
 | Token de segurança por tela | ❌ | ❌ | ✅ JWT RS256 em todas as rotas |
@@ -26,18 +19,6 @@ O AIAD automatiza a triagem documental para times de **Jurídico, Compliance e S
 | Conformidade LGPD nativa | Parcial | ❌ | ✅ Análise semântica por artigo |
 | Análise de assinatura digital | ❌ | ❌ | ✅ ICP-Brasil + biometria |
 | Relatório PDF auditável | Parcial | ✅ | ✅ Assinado + hash na trilha |
-
----
-
-## 🎯 Objetivos
-
-- Automatizar análises repetitivas de contratos e documentos
-- Separar claramente compliance LGPD da detecção de fraude (pipelines independentes)
-- Detectar inconsistências cadastrais, tentativas de fraude e autofraude
-- Suportar auditoria interna com trilha de evidências rastreável e imutável
-- Proteger dados em todas as camadas (JWT, AES-256, logs imutáveis)
-- Gerar relatórios com score de risco, achados e recomendações
-
 ---
 
 ## 🏗️ Arquitetura
@@ -643,54 +624,93 @@ MIT License — veja `LICENSE` para detalhes.
 
 ---
 
-## 1. Diagrama de Casos de Uso
+## 1 .🎭 Diagrama de Casos de Uso
 
-```
-Atores:
-  - Analista Antifraude
-  - Auditor Interno
-  - Gestor de Compliance
-  - Admin
+## 🎭 Diagrama de Casos de Uso
 
-Casos de uso por módulo:
-  [Autenticação]
-    UC-01: Autenticar com token JWT
+```mermaid
+usecaseDiagram
+  actor "Analista Antifraude" as AA
+  actor "Gestor de Compliance" as GC
+  actor "Auditor Interno" as AI
+  actor "Admin" as ADM
 
-  [Compliance — pipeline exclusivo]
-    UC-02: Analisar compliance LGPD
-    UC-03: Formalizar contrato
-    UC-04: Detectar dados pessoais expostos
+  package Autenticacao {
+    usecase "UC-01 Autenticar com token JWT" as UC01
+  }
 
-  [Antifraude — pipeline exclusivo]
-    UC-05: Detectar inconsistências cadastrais
-    UC-06: Detectar tentativa de fraude
-    UC-07: Analisar autofraude
-    UC-08: Analisar assinatura digital
+  package Compliance {
+    usecase "UC-02 Analisar compliance LGPD" as UC02
+    usecase "UC-03 Formalizar contrato" as UC03
+    usecase "UC-04 Detectar dados pessoais expostos" as UC04
+  }
 
-  [Documentos]
-    UC-09: Processar documento (OCR + hash)
-    UC-10: Comparar documentos
+  package Antifraude {
+    usecase "UC-05 Detectar inconsistencias cadastrais" as UC05
+    usecase "UC-06 Detectar tentativa de fraude" as UC06
+    usecase "UC-07 Analisar autofraude" as UC07
+    usecase "UC-08 Analisar assinatura digital" as UC08
+  }
 
-  [Auditoria]
-    UC-11: Conduzir auditoria interna
-    UC-12: Usar assistente IA de auditoria
-    UC-13: Gerar relatório de risco
-    UC-14: Exportar relatório de auditoria
+  package Documentos {
+    usecase "UC-09 Processar documento (OCR + hash)" as UC09
+    usecase "UC-10 Comparar documentos" as UC10
+  }
 
-  [Gestão]
-    UC-15: Gerenciar usuários e roles
+  package Auditoria {
+    usecase "UC-11 Conduzir auditoria interna" as UC11
+    usecase "UC-12 Usar assistente IA de auditoria" as UC12
+    usecase "UC-13 Gerar relatorio de risco" as UC13
+    usecase "UC-14 Exportar relatorio de auditoria" as UC14
+  }
 
-Associações:
-  Analista Antifraude → UC-01, UC-05, UC-06, UC-07, UC-08, UC-09, UC-10, UC-13
-  Gestor Compliance   → UC-01, UC-02, UC-03, UC-04, UC-09, UC-13, UC-14
-  Auditor Interno     → UC-01, UC-11, UC-12, UC-13, UC-14
-  Admin               → todos os UCs + UC-15
+  package Gestao {
+    usecase "UC-15 Gerenciar usuarios e roles" as UC15
+  }
 
-Relações de extensão e inclusão:
-  UC-02 <<include>> UC-09
-  UC-05 <<include>> UC-09
-  UC-11 <<extend>>  UC-13
-  UC-10 <<extend>>  UC-05
+  AA --> UC01
+  AA --> UC05
+  AA --> UC06
+  AA --> UC07
+  AA --> UC08
+  AA --> UC09
+  AA --> UC10
+  AA --> UC13
+
+  GC --> UC01
+  GC --> UC02
+  GC --> UC03
+  GC --> UC04
+  GC --> UC09
+  GC --> UC13
+  GC --> UC14
+
+  AI --> UC01
+  AI --> UC11
+  AI --> UC12
+  AI --> UC13
+  AI --> UC14
+
+  ADM --> UC01
+  ADM --> UC02
+  ADM --> UC03
+  ADM --> UC04
+  ADM --> UC05
+  ADM --> UC06
+  ADM --> UC07
+  ADM --> UC08
+  ADM --> UC09
+  ADM --> UC10
+  ADM --> UC11
+  ADM --> UC12
+  ADM --> UC13
+  ADM --> UC14
+  ADM --> UC15
+
+  UC02 --> UC09 : <<include>>
+  UC05 --> UC09 : <<include>>
+  UC11 --> UC13 : <<extend>>
+  UC10 --> UC05 : <<extend>>
 ```
 
 ---
@@ -829,8 +849,17 @@ sequenceDiagram
 
 ## Bloco 1 — Autenticação e segurança de acesso
 
+
+
 ### Tela 01 — Login
 **Rota:** `/login` | **Token:** não requerido | **Acesso:** público
+<img width="1024" height="572" alt="image" src="https://github.com/user-attachments/assets/d0dda4b9-6b24-4c55-91e8-7bc91cdc9edc" />
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/31e94dc3-efe7-4cc0-80f8-a2365898a72d" />
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/da46885c-f394-40ed-9f9d-e5356382b65b" />
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/fd338470-5028-43c5-aa65-53f8f58fd374" />
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/f7a866e8-01e9-435b-934a-49265c7c1a12" />
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/233660ac-5a69-4430-9d44-f51a4a58d641" />
+
 
 - Formulário com e-mail corporativo e senha (máscara + botão de visibilidade)
 - Painel lateral azul-escuro com informações de segurança (JWT, AES-256, LGPD)
@@ -887,6 +916,7 @@ sequenceDiagram
 - Lista de arquivos com barra de progresso individual e status (validando / aceito / erro)
 - Hash SHA-256 exibido para cada arquivo após upload, antes do processamento
 - Aviso de proteção com criptografia AES-256
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/82ba22f4-d18f-4161-b008-6dc0805ff7b9" />
 
 ### Tela 04 — Análise de compliance (etapa LGPD)
 **Rota:** `/processos/:id/compliance` | **Roles:** `GESTOR_COMPLIANCE`, `ANALISTA_FRAUDE`, `ADMIN`
@@ -898,6 +928,7 @@ sequenceDiagram
 - Painel de dados pessoais detectados com localização (página/linha) e botão de mascaramento
 - Gauge de score de compliance 0–100 com classificação
 - Botão para avançar ao pipeline de fraude (se análise combinada)
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/35c53fe6-1de5-42c9-a6c1-51a0cbdc3b7e" />
 
 ### Tela 05 — Análise antifraude (etapa fraude)
 **Rota:** `/processos/:id/fraude` | **Roles:** `ANALISTA_FRAUDE`, `ADMIN`
@@ -909,6 +940,7 @@ sequenceDiagram
 - Card de autofraude com vínculo identificado e botões de confirmação/descarte com registro obrigatório na trilha
 - Painel de análise de assinatura com status e nível de similaridade
 - Gauge de score de fraude 0–100 com fatores e pesos
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/3af5fe0e-1fa7-4bb4-97e7-01b01cfc54ea" />
 
 ### Tela 06 — Análise de assinatura digital
 **Rota:** `/processos/:id/assinatura` | **Roles:** `ANALISTA_FRAUDE`, `ADMIN`
@@ -921,6 +953,7 @@ sequenceDiagram
 - Barra visual de similaridade com limiar marcado (padrão 70%)
 - Métricas de pressão, velocidade e ângulo do traço
 - Contribuição em pontos ao score final de fraude
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/f3b0e236-45bc-437d-8937-0d27816ed37e" />
 
 ### Tela 07 — Score de risco e dashboard analítico
 **Rota:** `/processos/:id/score` | **Roles:** todos os roles autenticados
@@ -931,6 +964,7 @@ sequenceDiagram
 - Histórico de variação do score ao longo das análises do processo
 - Recomendações automáticas baseadas nos achados
 - Botões para exportar score e encaminhar para auditoria
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/adb48753-d401-40db-9f23-597ed2e5415b" />
 
 ### Tela 21 — Comparação de documentos
 **Rota:** `/processos/:id/comparar` | **Roles:** `ANALISTA_FRAUDE`, `ADMIN`
@@ -942,6 +976,7 @@ sequenceDiagram
 - Painel de resumo: campos comparados, idênticos, divergências críticas e moderadas
 - Percentual de similaridade geral com classificação
 - Botões para gerar evidência formal e adicionar à trilha de auditoria
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/2eec3917-7416-4618-bafc-6f0830624201" />
 
 ---
 
@@ -955,6 +990,7 @@ sequenceDiagram
 - Tabela de processos recentes com badges coloridos por score e status
 - Painel de alertas pendentes (scores ALTO e CRÍTICO não revisados)
 - Botão de novo processo
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/ae7ff6bc-167f-4aec-a86d-a0872817aa60" />
 
 ### Tela 10 — Detalhes do processo
 **Rota:** `/processos/:id` | **Roles:** todos os roles autenticados
@@ -964,6 +1000,7 @@ sequenceDiagram
 - Três gauges de score (compliance / fraude / composto) lado a lado
 - Painel de decisão do analista com registro na trilha
 - Lista de documentos anexados com tamanhos
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/691bd3c0-1272-42e6-b27c-1972bac394da" />
 
 ### Tela 14 — Histórico de processos
 **Rota:** `/processos` | **Roles:** todos os roles autenticados
@@ -973,6 +1010,7 @@ sequenceDiagram
 - Cards de métricas do período com comparação ao mês anterior
 - Tabela paginada com ordenação configurável e link direto para o processo
 - Exportação da lista em CSV
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/80072d27-bd60-4349-aaea-43354e6c46c1" />
 
 ### Tela 20 — Busca global
 **Rota:** `/busca` | **Roles:** todos os roles autenticados
@@ -981,6 +1019,8 @@ sequenceDiagram
 - Termos pesquisados destacados nos trechos dos resultados
 - Painel lateral com detalhes do resultado selecionado e ações diretas
 - Histórico de buscas recentes por usuário
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/f8d8fedd-5be9-403d-ab17-8ece25135fb0" />
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/54c2688a-5e78-4ba6-80db-c70c0ade2e52" />
 
 ---
 
@@ -995,6 +1035,7 @@ sequenceDiagram
 - Chat do assistente IA contextualizado ao processo filtrado, com citação de eventos
 - Exportação da trilha em JSON e CSV
 - Botão de geração de relatório PDF assinado digitalmente
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/8d5716f1-b243-4783-8adc-9ee29b06d404" />
 
 ### Tela 07B — Relatórios
 **Rota:** `/relatorios` | **Roles:** `AUDITOR`, `GESTOR_COMPLIANCE`, `ADMIN`
@@ -1003,6 +1044,7 @@ sequenceDiagram
 - Tabela de relatórios com busca, filtro por tipo e badges de score
 - Botões de download PDF e JSON por relatório
 - Hash do PDF exibido para conferência
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/8f4d5c24-e4d3-4bec-a215-2ce1aa7019b8" />
 
 ### Tela 22 — Exportação e integrações
 **Rota:** `/exportacao` | **Roles:** `ADMIN`
@@ -1011,6 +1053,7 @@ sequenceDiagram
 - Checkboxes de conteúdo a incluir: score, checklist LGPD, flags de fraude, evidências, trilha, diff
 - Aviso de segurança: hash do PDF registrado na trilha no momento da geração
 - Painel de integrações com status em tempo real: Receita Federal, ICP-Brasil, BACEN SCR e slots para configuração de CRM Jurídico e Webhook
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/42fbd227-cc51-4aa2-9009-7f842c062cf1" />
 
 ---
 
@@ -1023,6 +1066,7 @@ sequenceDiagram
 - Lista de usuários com avatar, nome, e-mail, role, status (ativo / bloqueado) e último acesso
 - Caso real de conta bloqueada com botão de desbloqueio manual
 - Aviso: toda alteração é registrada na trilha de auditoria com o token do ADMIN
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/6b430348-1fd5-4a45-bc84-69532e259748" />
 
 ### Tela 12 — Configurações de segurança
 **Rota:** `/admin/segurança` | **Roles:** `ADMIN` exclusivo
@@ -1032,6 +1076,7 @@ sequenceDiagram
 - Toggles interativos com estado persistido
 - Campos marcados como "Obrigatório" (AES-256, hash SHA-256, trilha imutável) não podem ser desativados
 - Aviso: tentativa de desativar campos obrigatórios é registrada como evento de segurança crítico
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/ba405193-b0f1-4365-9ddf-115fbb1e55d9" />
 
 ### Tela 15 — Status do sistema
 **Rota:** `/admin/status` | **Roles:** `ADMIN` exclusivo
@@ -1041,6 +1086,7 @@ sequenceDiagram
 - Alertas de infraestrutura com destaque para módulos em atenção
 - Checklist de conformidade de segurança (TLS, AES-256, JWT blocklist, rate limiting, trilha)
 - Informações do último backup com hash verificado
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/e16614fe-347c-4fa1-9632-e92790743a29" />
 
 ### Tela 24 — Alerta por e-mail (preview e templates)
 **Rota:** `/admin/email-templates` | **Roles:** `ADMIN` exclusivo
@@ -1049,6 +1095,7 @@ sequenceDiagram
 - Footer com conformidade LGPD e link de cancelamento de notificações
 - Configuração do template: assunto com variáveis, destinatários, gatilho de score
 - Estatísticas de uso: taxa de abertura, cliques no link, tempo médio de leitura
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/24a4c53d-b191-454c-a324-c4543c7777c0" />
 
 ### Tela 25 — Logs do sistema
 **Rota:** `/admin/logs` | **Roles:** `ADMIN` exclusivo
@@ -1058,6 +1105,7 @@ sequenceDiagram
 - Destaque automático do termo pesquisado nas mensagens
 - Contador de erros, avisos e infos no cabeçalho
 - Paginação e exportação em arquivo de texto
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/a5bf4d21-e612-42ff-bc3f-0b63daafe190" />
 
 ---
 
@@ -1071,6 +1119,7 @@ sequenceDiagram
 - Cards de atividade recente (processos hoje, fraudes confirmadas, histórico total)
 - Histórico dos últimos acessos com IP e horário
 - Preferências de notificação por tipo de alerta
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/6e9f6bdb-2f62-448c-8fe0-633be77a9ac9" />
 
 ### Tela 23 — Painel executivo
 **Rota:** `/executivo` | **Roles:** `GESTOR_COMPLIANCE`, `ADMIN`
@@ -1081,6 +1130,7 @@ sequenceDiagram
 - Ranking de tipos de fraude detectada e top 4 de não conformidades LGPD
 - Tabela de performance por analista (processos, fraudes, tempo médio)
 - Gráfico de tendência semanal de volume e gauge de SLA de alertas
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/565c44cc-9f63-4076-b559-2e5668cb1fe9" />
 
 ### Tela 26 — Ajuda e documentação
 **Rota:** `/ajuda` | **Roles:** todos os roles autenticados
@@ -1089,6 +1139,7 @@ sequenceDiagram
 - FAQ interativo com respostas expandíveis
 - Guias rápidos com estimativa de tempo por tarefa
 - Versão do sistema e status de atualização
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/b2453c22-d7a1-43da-baa5-b1623edbeebb" />
 
 ### Tela 27 — Política de privacidade e LGPD
 **Rota:** `/privacidade` | **Roles:** todos os roles autenticados
@@ -1097,6 +1148,7 @@ sequenceDiagram
 - Checklist de 8 artigos da LGPD com descrição de como cada um é atendido
 - Painel dos 5 direitos dos titulares com descrição de como exercê-los
 - Contato do DPO com prazo de resposta garantido (15 dias)
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/0d7de16b-266b-442c-8401-ea758a12d846" />
 
 ### Tela 28 — Encerramento de processo
 **Rota:** `/processos/:id/encerrar` | **Roles:** `ANALISTA_FRAUDE`, `GESTOR_COMPLIANCE`, `ADMIN`
@@ -1108,6 +1160,7 @@ sequenceDiagram
 - Aviso de que o processo não pode ser reaberto sem autorização do ADMIN
 
 - # Infraestrutura AIAD — Docker Compose
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/1741f9bc-f9e3-468d-b34e-ff596d7a108b" />
 
 > Execute `docker compose up -d` para subir todos os serviços localmente.
 
