@@ -1452,8 +1452,6 @@ O AIAD é um sistema de análise documental com foco em prevenção a fraude, sc
 
 O problema atacado pelo AIAD é real e validado por players estabelecidos: **Serasa Experian, ClearSale, idwall e Unico** atuam em segmentos semelhantes (KYC, antifraude, compliance documental). Mercados potenciais incluem bancos, fintechs, seguradoras, cooperativas de crédito, imobiliárias, RH e GovTechs.
 
-O modelo de cobrança usual nesse setor é SaaS B2B por transação, na faixa de **R$ 2,00 a R$ 7,00 por análise**. Uma operação processando 20.000 documentos/mês geraria uma receita/economia estimada de **R$ 80.000/mês** — referência útil para projetar payback, mas que deve ser validada com volume real de um piloto antes de ser usada como premissa de negócio.
-
 ---
 
 ## 7. Valor e ROI
