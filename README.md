@@ -1478,7 +1478,7 @@ O modelo de cobrança usual nesse setor é SaaS B2B por transação, na faixa de
 | Inovação (sem diferencial definido) | 6 |
 | Qualidade de arquitetura proposta | 8 |
 
-**Nota geral estimada: 8/10** — projeto de complexidade compatível com estágio avançado/início de carreira em engenharia de dados e software; como TCC, o valor acadêmico é claramente superior ao custo de execução do MVP.
+
 
 ---
 
