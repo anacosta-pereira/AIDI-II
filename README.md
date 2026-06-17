@@ -1494,14 +1494,4 @@ O modelo de cobrança usual nesse setor é SaaS B2B por transação, na faixa de
 
 ---
 
-## 10. Próximos Passos
-
-1. Validar premissas de orçamento da Fase 2 e 3 com cotações reais de fornecedores cloud e APIs.
-2. Rodar a Fase 1 (MVP) como prova de conceito antes de comprometer recursos da Fase 2.
-3. Envolver um especialista jurídico/compliance LGPD já no planejamento da Fase 2.
-4. Definir o diferencial competitivo antes de buscar investimento ou parceiros comerciais.
-5. Revisar este documento a cada marco de fase concluído.
-
----
-
 *Documento gerado a partir da consolidação de três planejamentos prévios do projeto AIAD.*
