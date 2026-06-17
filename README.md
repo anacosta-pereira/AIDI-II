@@ -1432,8 +1432,6 @@ O AIAD é um sistema de análise documental com foco em prevenção a fraude, sc
 | Custos Operacionais e Legais | Auditoria, conformidade LGPD, retenção e monitoramento de dados | R$ 50.000 – R$ 200.000 |
 | **Total** | | **R$ 500.000 – R$ 2.000.000** |
 
-> Os intervalos largos da Fase 3 refletem incerteza real: o valor final depende do número de integrações contratadas, do porte da equipe permanente e do nível de auditoria exigido pelos clientes (bancário costuma exigir mais que varejo, por exemplo). Recomenda-se substituir essas faixas por cotações reais antes de usar os números em uma proposta formal.
-
 ---
 
 ## 5. Recursos Necessários
