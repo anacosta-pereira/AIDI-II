@@ -1310,3 +1310,198 @@ openssl genrsa -out secrets/jwt_private.pem 2048
 # Extrair chave pública
 openssl rsa -in secrets/jwt_private.pem -pubout -out secrets/jwt_public.pem
 ```
+# Planejamento do Projeto AIAD — Agente Inteligente de Análise Documental
+
+> Documento de planejamento estratégico, orçamentário e operacional. Estrutura faseada (MVP → Piloto → Escala), permitindo apresentar o projeto tanto em contexto acadêmico quanto comercial.
+
+---
+
+## 1. Sumário Executivo
+
+O AIAD é um sistema de análise documental com foco em prevenção a fraude, score de risco e compliance (KYC/LGPD), voltado a instituições financeiras, fintechs, seguradoras e GovTechs. Este planejamento adota uma abordagem em **3 fases**, permitindo validar o conceito com baixo investimento antes de escalar para um produto enterprise-ready.
+
+| Fase | Objetivo | Duração | Investimento estimado |
+|---|---|---|---|
+| **1. MVP / Prova de Conceito** | Validar arquitetura e core de análise | 3–4 meses | R$ 2.000 – R$ 5.000 |
+| **2. Piloto Comercial** | Produto funcional com squad dedicada | 5 meses | R$ 270.000 – R$ 355.000 |
+| **3. Escala Corporativa** | Produto enterprise, múltiplas integrações | +3 a 6 meses | R$ 500.000 – R$ 2.000.000 |
+
+---
+
+## 2. Equipe por Fase
+
+### Fase 1 — MVP / Acadêmico (3–4 pessoas)
+
+| Função | Atribuição |
+|---|---|
+| Desenvolvedor Backend | API, banco PostgreSQL, autenticação |
+| Desenvolvedor Frontend | Dashboard básico |
+| Analista/Cientista de Dados | Motor de score inicial |
+| Gerente de Projeto (opcional) | Coordenação e cronograma |
+
+### Fase 2 — Piloto Comercial (5 pessoas, squad enxuta)
+
+| Função | Atribuições Principais |
+|---|---|
+| Arquiteto de Software / DevOps | Infraestrutura (Docker, Redis, Postgres), segurança (JWT RS256), integrações (Receita Federal, ICP-Brasil) |
+| Engenheiro de Dados / IA | Módulo de Compliance (NLP/LGPD) e motor antifraude (score composto) |
+| Desenvolvedor Backend (Sênior) | API Gateway, Auth Service, microsserviços |
+| Desenvolvedor Frontend | Dashboard do analista e painel de auditoria |
+| Product Owner / QA | Regras de negócio de risco e testes de cenários críticos |
+
+### Fase 3 — Escala Corporativa (8–9 pessoas)
+
+| Função | Pessoas |
+|---|---|
+| Backend | 2–3 |
+| Frontend | 1–2 |
+| Dados / IA | 1–2 |
+| DevOps | 1 |
+| QA | 1 |
+| Analista de Compliance/LGPD | 1 |
+| Product Owner / Gestão | 1 |
+
+> A passagem de fase não significa trocar a equipe — a squad da Fase 2 normalmente se expande, incorporando QA dedicado e um especialista de compliance que antes era responsabilidade compartilhada.
+
+---
+
+## 3. Cronograma
+
+### Fase 1 — MVP (3–4 meses)
+
+| Etapa | Tempo |
+|---|---|
+| Levantamento de requisitos | 2 semanas |
+| Arquitetura | 1 semana |
+| Backend | 4 semanas |
+| Frontend | 3 semanas |
+| IA e Score (versão inicial) | 4 semanas |
+| Testes | 2 semanas |
+
+### Fase 2 — Piloto Comercial (5 meses)
+
+| Mês | Entrega |
+|---|---|
+| 1 | Fundação & Segurança — API Gateway, Auth Service (JWT RS256), ambientes Postgres/Redis |
+| 2 | Motores de Análise — Módulo de Compliance (NLP/LGPD) e Módulo Antifraude (validações cadastrais) |
+| 3 | Inteligência & Auditoria — Score Engine (pesos compostos), trilha de auditoria, PDFs assinados |
+| 4 | Interface & Notificação — Dashboard, sistema de alertas, SLA de resposta (< 2 min) |
+| 5 | Homologação & Go-Live — testes de carga, auditoria de segurança, deploy em produção |
+
+### Fase 3 — Escala Corporativa (+3 a 6 meses)
+
+| Etapa | Tempo |
+|---|---|
+| Hardening de segurança e auditoria externa | 4–6 semanas |
+| Expansão de integrações (novos birôs, novas bases) | 4–8 semanas |
+| Certificação de compliance / adequação LGPD plena | 4 semanas |
+| Testes de carga em escala e ajustes de performance | 4 semanas |
+
+**Tempo total do ciclo completo (MVP → Enterprise): 11 a 15 meses**
+
+---
+
+## 4. Orçamento Detalhado
+
+### Fase 1 — MVP / Acadêmico
+
+| Item | Valor |
+|---|---|
+| Infraestrutura (hospedagem básica) | R$ 500 – R$ 2.000 |
+| APIs externas (testes) | R$ 1.000 |
+| Domínio e hospedagem | R$ 500 |
+| Ferramentas | R$ 500 |
+| **Total** | **R$ 2.000 – R$ 5.000** |
+
+### Fase 2 — Piloto Comercial
+
+| Categoria | Descrição | Valor Estimado |
+|---|---|---|
+| Pessoal (squad / 5 meses) | Remuneração da equipe de engenharia e produto | R$ 250.000 – R$ 320.000 |
+| Infraestrutura Cloud (Dev/Staging) | AWS/GCP, bancos gerenciados, processamento de IA | R$ 15.000 – R$ 25.000 |
+| Licenças e APIs Externas | Birôs de dados, homologações de certificados (ICP-Brasil) | R$ 5.000 – R$ 10.000 |
+| **Total (Capex)** | | **R$ 270.000 – R$ 355.000** |
+
+### Fase 3 — Escala Corporativa
+
+| Categoria | Descrição | Valor Estimado |
+|---|---|---|
+| Infraestrutura | Servidores PostgreSQL/Redis em produção, armazenamento, backup, redundância | R$ 150.000 – R$ 400.000 |
+| Licenças e Integrações | APIs externas adicionais (Receita Federal, ICP-Brasil, novos birôs), SMTP corporativo | R$ 50.000 – R$ 100.000 |
+| Equipe (anual, time ampliado) | Backend, frontend, IA/dados, DevOps, compliance, gestão | R$ 300.000 – R$ 1.000.000 |
+| Custos Operacionais e Legais | Auditoria, conformidade LGPD, retenção e monitoramento de dados | R$ 50.000 – R$ 200.000 |
+| **Total** | | **R$ 500.000 – R$ 2.000.000** |
+
+> Os intervalos largos da Fase 3 refletem incerteza real: o valor final depende do número de integrações contratadas, do porte da equipe permanente e do nível de auditoria exigido pelos clientes (bancário costuma exigir mais que varejo, por exemplo). Recomenda-se substituir essas faixas por cotações reais antes de usar os números em uma proposta formal.
+
+---
+
+## 5. Recursos Necessários
+
+**Tecnológicos:** Docker, PostgreSQL, Redis, API Gateway, autenticação JWT (RS256), integrações com Receita Federal e ICP-Brasil, SMTP para alertas, infraestrutura cloud (AWS/GCP).
+
+**Humanos:** equipe multidisciplinar conforme fase (seção 2), com ênfase em conhecimento de domínio (KYC, prevenção a fraude, LGPD) — não apenas competência técnica genérica.
+
+**Legais/Compliance:** adequação à LGPD, auditoria de segurança, trilha de auditoria documental, retenção controlada de dados.
+
+**Operacionais:** monitoramento contínuo, suporte técnico, SLA de resposta definido (ex.: < 2 minutos por análise).
+
+---
+
+## 6. Análise de Mercado e Concorrência
+
+O problema atacado pelo AIAD é real e validado por players estabelecidos: **Serasa Experian, ClearSale, idwall e Unico** atuam em segmentos semelhantes (KYC, antifraude, compliance documental). Mercados potenciais incluem bancos, fintechs, seguradoras, cooperativas de crédito, imobiliárias, RH e GovTechs.
+
+O modelo de cobrança usual nesse setor é SaaS B2B por transação, na faixa de **R$ 2,00 a R$ 7,00 por análise**. Uma operação processando 20.000 documentos/mês geraria uma receita/economia estimada de **R$ 80.000/mês** — referência útil para projetar payback, mas que deve ser validada com volume real de um piloto antes de ser usada como premissa de negócio.
+
+---
+
+## 7. Valor e ROI
+
+| Indicador | Estimativa | Observação |
+|---|---|---|
+| Redução de custos operacionais | até 70% | Estimativa de mercado para automação de triagem documental — validar com piloto |
+| Diminuição de erros de análise manual | até 94% | Depende da qualidade dos dados de treino do score; validar com amostra real |
+| Payback estimado | < 6 meses | Baseado em receita de R$ 80k/mês vs. Capex da Fase 2; não considera custos recorrentes da Fase 3 |
+
+> Diferencial competitivo: o projeto se destaca quando combina score de fraude explicável, foco em segmentos pouco atendidos (ex. pequenas empresas) e automação de compliance a baixo custo. Sem um diferencial claro, compete diretamente com players já consolidados.
+
+---
+
+## 8. Avaliação de Viabilidade
+
+| Critério | Nota (0–10) |
+|---|---|
+| Complexidade técnica | 8 |
+| Aplicação prática / relevância de mercado | 9 |
+| Potencial de mercado | 9 |
+| Inovação (sem diferencial definido) | 6 |
+| Qualidade de arquitetura proposta | 8 |
+
+**Nota geral estimada: 8/10** — projeto de complexidade compatível com estágio avançado/início de carreira em engenharia de dados e software; como TCC, o valor acadêmico é claramente superior ao custo de execução do MVP.
+
+---
+
+## 9. Riscos e Mitigação
+
+| Risco | Impacto | Mitigação |
+|---|---|---|
+| Integração com bases governamentais (Receita Federal, ICP-Brasil) sujeita a instabilidade/mudança de API | Alto | Camada de abstração de integração, testes de contingência, monitoramento ativo |
+| Não conformidade com LGPD | Alto | Envolver especialista em compliance desde a Fase 2, não apenas na Fase 3 |
+| Viés ou falta de explicabilidade no motor de score | Médio-Alto | Documentar pesos e critérios do score, manter trilha de auditoria desde o início |
+| Estouro de orçamento na Fase 3 | Médio | Negociar contratos por entrega/módulo, revisar orçamento a cada integração nova |
+| Dependência de poucos especialistas-chave (IA/Dados) | Médio | Documentação técnica contínua, pareamento de conhecimento |
+
+---
+
+## 10. Próximos Passos
+
+1. Validar premissas de orçamento da Fase 2 e 3 com cotações reais de fornecedores cloud e APIs.
+2. Rodar a Fase 1 (MVP) como prova de conceito antes de comprometer recursos da Fase 2.
+3. Envolver um especialista jurídico/compliance LGPD já no planejamento da Fase 2.
+4. Definir o diferencial competitivo antes de buscar investimento ou parceiros comerciais.
+5. Revisar este documento a cada marco de fase concluído.
+
+---
+
+*Documento gerado a partir da consolidação de três planejamentos prévios do projeto AIAD.*
